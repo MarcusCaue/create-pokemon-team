@@ -91,7 +91,29 @@ export default function App() {
   }
 
   useEffect(() => {
-    getPokemon("lugia")
+    // getPokemon("lugia")
+    setPokemonImg({
+      official: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png",
+      animated: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/249.gif",
+      pixelated: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png"
+    })
+
+    const statsPokemonTest: Stats = {
+      hp: 1,
+      attack: 1,
+      defense: 1,
+      specialAttack: 1,
+      specialDefense: 1,
+      speed: 1
+    } 
+
+    const pokemonTest = new Pokemon(
+      "lugia",
+      [ "physic", "flying" ],
+      statsPokemonTest
+    )
+
+    setPokemon(pokemonTest)
   }, [])
 
   return (
