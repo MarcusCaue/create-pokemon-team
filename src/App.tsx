@@ -15,6 +15,7 @@ import { ResetCss } from "./styles/general/ResetCss"
 import { SearchPokemonSection } from "./styles/containers/SearchPokemonSection"
 import { HeaderPage } from "./styles/general/HeaderPage"
 import { TeamPokemonSection } from "./styles/containers/TeamPokemonSection"
+import { TypePokemon } from "./components/TypePokemon"
 
 export default function App() {
   // States

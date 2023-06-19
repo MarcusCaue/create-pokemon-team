@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { ImgOptions } from "../../interfaces/ImgOptions"
 import { Pokemon } from "../../classes/Pokemon"
+import { TypePokemon } from "../TypePokemon"
 
 const InformationsPokemonStyle = styled.section`
   align-items: center;
@@ -25,6 +26,11 @@ const DataPokemonStyle = styled.section`
     gap: 0.3rem;
     list-style: none;
   }
+`
+const ListItemTypesPokemonStyle = styled.li`
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
 `
 
 function formatName(name: string | undefined) {
@@ -68,7 +74,9 @@ export function InformationsPokemon({ imagesOfPokemon, optionImageChoiced, pokem
       <DataPokemonStyle>
         <ul>
           <li> Nome: {formatName(pokemon?.name)} </li>
-          <li> Tipos: {pokemon?.types ? pokemon.types.join(" | ") : "< Os tipos do Pokemon não foram encontrados >"} </li>
+          <ListItemTypesPokemonStyle> 
+            Tipos: {pokemon?.types ? <TypePokemon types={pokemon.types} /> : "< Os tipos do Pokemon não foram encontrados >"} 
+          </ListItemTypesPokemonStyle>
           <li> HP: {pokemon?.stats.hp} </li>
           <li> Ataque: {pokemon?.stats.attack} </li>
           <li> Defesa: {pokemon?.stats.defense} </li>
