@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { ImgOptions } from "../../interfaces/ImgOptions"
+import { ImgOptions } from "../../interfaces/index"
 import { Pokemon } from "../../classes/Pokemon"
 import { TypePokemon } from "../TypePokemon"
 

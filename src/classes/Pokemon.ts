@@ -1,4 +1,4 @@
-import { Stats } from "../interfaces/Stats"
+import { Stats } from "../interfaces/index"
 
 export class Pokemon {
   public name: string

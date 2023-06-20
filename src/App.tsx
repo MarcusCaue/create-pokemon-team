@@ -5,17 +5,12 @@ import { Pokemon } from "./classes/Pokemon"
 import { InformationsPokemon } from "./components/containers/InformationsPokemon"
 import { GetFormPokemon } from "./components/containers/GetFormPokemon"
 // Interfaces
-import { ImgOptions } from "./interfaces/ImgOptions"
-import { Stats } from "./interfaces/Stats"
-import { TypesPokemonPokeApi } from "./interfaces/TypesPokemonPokeApi"
+import { ImgOptions, Stats, TypesPokemonPokeApi } from "./interfaces/index"
 // Styles
-import { Body } from "./styles/general/Body"
-import { Container } from "./styles/containers/Container"
-import { ResetCss } from "./styles/general/ResetCss"
-import { SearchPokemonSection } from "./styles/containers/SearchPokemonSection"
-import { HeaderPage } from "./styles/general/HeaderPage"
-import { TeamPokemonSection } from "./styles/containers/TeamPokemonSection"
-import { TypePokemon } from "./components/TypePokemon"
+import { Body, ResetCss, HeaderPage } from "./styles/general/index.style"
+import { Container } from "./styles/containers/StyledContainer.style"
+import { StyledSearchPokemon } from "./styles/containers/StyledSearchPokemon.style"
+import { StyledTeamPokemon } from "./styles/containers/StyledTeamPokemon.style"
 
 export default function App() {
   // States
@@ -95,7 +90,7 @@ export default function App() {
         <HeaderPage> Monte o seu Time de Pokemons! </HeaderPage>
 
         <Container>
-          <SearchPokemonSection>
+          <StyledSearchPokemon>
             <InformationsPokemon 
               imagesOfPokemon={pokemonImg} 
               pokemon={pokemon} 
@@ -107,12 +102,12 @@ export default function App() {
               optionImageChoiced={optionImage} 
               changeOptionImage={setOptionImage} 
             />
-          </SearchPokemonSection>
+          </StyledSearchPokemon>
 
-          <TeamPokemonSection>
+          <StyledTeamPokemon>
             Aqui haverá futuramente o time de Pokemons que o usuário criou! <br />
             Aguarde! ;)
-          </TeamPokemonSection>
+          </StyledTeamPokemon>
         </Container>
       </Body>
     </>

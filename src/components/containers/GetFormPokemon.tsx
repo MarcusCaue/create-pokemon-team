@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
-import { Button } from "../../styles/Button";
-import { Input } from "../../styles/Input";
+import { StyledButton } from "../../styles/StyledButton.style";
+import { StyledInput } from "../../styles/StyledInput.style";
 import { InputRadio } from "../InputRadio";
 const FormContainer = styled.form`
   flex: 1;
@@ -36,7 +36,7 @@ export function GetFormPokemon({ submitFormFunction, refInput, optionImageChoice
     <section>
       <FormContainer onSubmit={submitFormFunction}>
         <div>
-          <Input type="text" name="pokemonName" id="pokemonName" ref={refInput} placeholder="Digite o nome do Pokemon: " />
+          <StyledInput type="text" name="pokemonName" id="pokemonName" ref={refInput} placeholder="Digite o nome do Pokemon: " />
         </div>
         {/* Input Radios */}
         <RadiosContainer>
@@ -45,7 +45,7 @@ export function GetFormPokemon({ submitFormFunction, refInput, optionImageChoice
           <InputRadio optionName="animated" title="Animada" onChangeFunction={changeOptionImage} optionImageVar={optionImageChoiced} />
         </RadiosContainer>
         <div>
-          <Button type="submit"> Enviar </Button>
+          <StyledButton type="submit"> Enviar </StyledButton>
         </div>
       </FormContainer>
     </section>
