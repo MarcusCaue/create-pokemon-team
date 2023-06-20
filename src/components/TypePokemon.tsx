@@ -22,7 +22,7 @@ const typesColors = new Map([
 ])
 
 const TypePokemonStyle = styled.span<{$type: string}>`
-  background-color: ${props => {console.log(typesColors.get(props.$type)?.bgColor); return typesColors.get(props.$type)?.bgColor}};
+  background-color: ${props => typesColors.get(props.$type)?.bgColor};
   color: ${props => typesColors.get(props.$type)?.textColor};
 
   border: 1px solid black;
@@ -39,8 +39,6 @@ interface TypePokemonProps {
 }
 
 export function TypePokemon({ types }: TypePokemonProps) {
-  console.log(typesColors.get("psychic")?.bgColor)
-
   return (
     <TypesPokemonContainerStyle>
       { 

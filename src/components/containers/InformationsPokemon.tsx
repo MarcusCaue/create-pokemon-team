@@ -3,34 +3,52 @@ import { ImgOptions } from "../../interfaces/index"
 import { Pokemon } from "../../classes/Pokemon"
 import { TypePokemon } from "../TypePokemon"
 
-const InformationsPokemonStyle = styled.section`
-  align-items: center;
-  justify-content: center;
+const StyledInformationsPokemon = styled.section`
   gap: 1.5rem;
 `
-const ImagePokemonStyle = styled.section`
-  width: 50%;
-
+const StyledImagePokemon = styled.section<{$animatedIsChoiced: boolean}>`
+  flex: 1;
+  background-color: var(--color-base-gray-100);
   img {
+    display: block;
+    margin: ${props => props.$animatedIsChoiced ? '1rem auto;' : "auto"};
     height: 16rem;
     width: 16rem;
     object-fit: contain;
   }
 `
-const DataPokemonStyle = styled.section`
-  font-size: 1.1rem;
+const StyledDataPokemon = styled.section`
+  width: 40%;
+  font-size: 1.2rem;
+  /* background-color: #30A7D7; */
   
-  ul {
+  > ul {
+    height: 100%;
+    list-style: none;
+
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 0.3rem;
-    list-style: none;
+
+    > li {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 `
 const ListItemTypesPokemonStyle = styled.li`
   display: flex;
   gap: 0.3rem;
   align-items: center;
+`
+const StyledAttribute = styled.span`
+  /* color: var(--color-base-gray-100); */
+  /* font-weight: 600; */
+`
+const StyledValue = styled.span`
+  /* color: var(--color-base-blue-700); */
+  /* font-weight: 600; */
 `
 
 function formatName(name: string | undefined) {
@@ -58,8 +76,8 @@ interface InformationsPokemonProps {
 
 export function InformationsPokemon({ imagesOfPokemon, optionImageChoiced, pokemon }: InformationsPokemonProps) {
   return (
-    <InformationsPokemonStyle>
-      <ImagePokemonStyle>
+    <StyledInformationsPokemon>
+      <StyledImagePokemon $animatedIsChoiced={optionImageChoiced === "animated" ? true : false}>
         <img src={
           imagesOfPokemon !== undefined
             ?
@@ -69,22 +87,37 @@ export function InformationsPokemon({ imagesOfPokemon, optionImageChoiced, pokem
               :
               imagesOfPokemon[optionImageChoiced as keyof ImgOptions]
             : ''} alt="Imagem de um Pokémon" />
-      </ImagePokemonStyle>
+      </StyledImagePokemon>
 
-      <DataPokemonStyle>
+      <StyledDataPokemon>
         <ul>
-          <li> Nome: {formatName(pokemon?.name)} </li>
+          <li> 
+            <StyledAttribute>Nome:</StyledAttribute> <StyledValue>{formatName(pokemon?.name)}</StyledValue> 
+          </li>
           <ListItemTypesPokemonStyle> 
-            Tipos: {pokemon?.types ? <TypePokemon types={pokemon.types} /> : "< Os tipos do Pokemon não foram encontrados >"} 
+            <StyledAttribute>Tipos: </StyledAttribute>
+            <StyledValue>{pokemon?.types ? <TypePokemon types={pokemon.types} /> : "< Os tipos do Pokemon não foram encontrados >"}</StyledValue> 
           </ListItemTypesPokemonStyle>
-          <li> HP: {pokemon?.stats.hp} </li>
-          <li> Ataque: {pokemon?.stats.attack} </li>
-          <li> Defesa: {pokemon?.stats.defense} </li>
-          <li> Ataque Especial: {pokemon?.stats.specialAttack} </li>
-          <li> Defesa Especial: {pokemon?.stats.specialDefense} </li>
-          <li> Velocidade: {pokemon?.stats.speed} </li>
+          <li>
+            <StyledAttribute>HP:</StyledAttribute> <StyledValue>{pokemon?.stats.hp}</StyledValue> 
+          </li>
+          <li>
+            <StyledAttribute>Ataque:</StyledAttribute> <StyledValue>{pokemon?.stats.attack}</StyledValue> 
+          </li>
+          <li>
+            <StyledAttribute>Defesa:</StyledAttribute> <StyledValue>{pokemon?.stats.defense}</StyledValue> 
+          </li>
+          <li>
+            <StyledAttribute>Ataque Especial:</StyledAttribute> <StyledValue>{pokemon?.stats.specialAttack}</StyledValue> 
+          </li>
+          <li>
+            <StyledAttribute>Defesa Especial:</StyledAttribute> <StyledValue>{pokemon?.stats.specialDefense}</StyledValue> 
+          </li>
+          <li>
+            <StyledAttribute>Velocidade:</StyledAttribute> <StyledValue>{pokemon?.stats.speed}</StyledValue> 
+          </li>
         </ul>
-      </DataPokemonStyle>
-    </InformationsPokemonStyle>
+      </StyledDataPokemon>
+    </StyledInformationsPokemon>
   )
 }

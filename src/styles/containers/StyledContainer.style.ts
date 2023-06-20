@@ -6,6 +6,6 @@ export const Container = styled.main`
   padding: 1.5rem 8rem;
 
   > section {
-    display: flex;
+    display: flex;    
   }
 `

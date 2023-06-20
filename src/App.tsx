@@ -1,6 +1,6 @@
 // Import statements
-import { FormEvent, useEffect, useRef, useState } from "react"
 import api from "./tools/api"
+import { FormEvent, useEffect, useRef, useState } from "react"
 import { Pokemon } from "./classes/Pokemon"
 import { InformationsPokemon } from "./components/containers/InformationsPokemon"
 import { GetFormPokemon } from "./components/containers/GetFormPokemon"
@@ -8,9 +8,9 @@ import { GetFormPokemon } from "./components/containers/GetFormPokemon"
 import { ImgOptions, Stats, TypesPokemonPokeApi } from "./interfaces/index"
 // Styles
 import { Body, ResetCss, HeaderPage } from "./styles/general/index.style"
-import { Container } from "./styles/containers/StyledContainer.style"
 import { StyledSearchPokemon } from "./styles/containers/StyledSearchPokemon.style"
 import { StyledTeamPokemon } from "./styles/containers/StyledTeamPokemon.style"
+import { Container } from "./styles/containers/StyledContainer.style"
 
 export default function App() {
   // States
@@ -76,7 +76,7 @@ export default function App() {
 
     const pokemonTest = new Pokemon(
       "lugia",
-      [ "physic", "flying" ],
+      [ "psychic", "flying" ],
       statsPokemonTest
     )
 
