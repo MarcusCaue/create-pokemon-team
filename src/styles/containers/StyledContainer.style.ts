@@ -2,10 +2,13 @@ import styled from "styled-components"
 
 export const Container = styled.main`
   display: flex;
-  gap: 5rem;
-  padding: 1.5rem 8rem;
+  gap: 1rem;
+  margin: 1.5rem auto;
 
   > section {
-    display: flex;    
+    background-color: var(--color-background-second);
+    display: flex;
+    padding: 0.8rem 2.5rem;
+    border-radius: 0.5rem;
   }
 `

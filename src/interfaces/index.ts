@@ -1,3 +1,10 @@
+export interface StylesMode {
+  baseText: string,
+  contrastText: string,
+  backgroundOne: string,
+  backgroundSecond: string
+}
+
 export interface ImgOptions {
   official: string,
   pixelated: string,

@@ -8,7 +8,6 @@ const StyledInformationsPokemon = styled.section`
 `
 const StyledImagePokemon = styled.section<{$animatedIsChoiced: boolean}>`
   flex: 1;
-  background-color: var(--color-base-gray-100);
   img {
     display: block;
     margin: ${props => props.$animatedIsChoiced ? '1rem auto;' : "auto"};
@@ -47,7 +46,7 @@ const StyledAttribute = styled.span`
   /* font-weight: 600; */
 `
 const StyledValue = styled.span`
-  /* color: var(--color-base-blue-700); */
+  color: var(--color-contrast-text);
   /* font-weight: 600; */
 `
 

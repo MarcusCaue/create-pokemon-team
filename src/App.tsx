@@ -7,7 +7,7 @@ import { GetFormPokemon } from "./components/containers/GetFormPokemon"
 // Interfaces
 import { ImgOptions, Stats, TypesPokemonPokeApi } from "./interfaces/index"
 // Styles
-import { Body, ResetCss, HeaderPage } from "./styles/general/index.style"
+import { Body, ResetGlobalCss, HeaderPage } from "./styles/general/index.style"
 import { StyledSearchPokemon } from "./styles/containers/StyledSearchPokemon.style"
 import { StyledTeamPokemon } from "./styles/containers/StyledTeamPokemon.style"
 import { Container } from "./styles/containers/StyledContainer.style"
@@ -85,7 +85,7 @@ export default function App() {
 
   return (
     <>
-      <ResetCss />
+      <ResetGlobalCss $darkModeActived={true} />
       <Body>
         <HeaderPage> Monte o seu Time de Pokemons! </HeaderPage>
 
