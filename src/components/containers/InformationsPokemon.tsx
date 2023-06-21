@@ -36,7 +36,7 @@ const StyledDataPokemon = styled.section`
     }
   }
 `
-const ListItemTypesPokemonStyle = styled.li`
+const StyledListItemTypesPokemon = styled.li`
   display: flex;
   gap: 0.3rem;
   align-items: center;
@@ -93,10 +93,12 @@ export function InformationsPokemon({ imagesOfPokemon, optionImageChoiced, pokem
           <li> 
             <StyledAttribute>Nome:</StyledAttribute> <StyledValue>{formatName(pokemon?.name)}</StyledValue> 
           </li>
-          <ListItemTypesPokemonStyle> 
+          <StyledListItemTypesPokemon> 
             <StyledAttribute>Tipos: </StyledAttribute>
-            <StyledValue>{pokemon?.types ? <TypePokemon types={pokemon.types} /> : "< Os tipos do Pokemon não foram encontrados >"}</StyledValue> 
-          </ListItemTypesPokemonStyle>
+            <StyledValue>
+              {pokemon?.types ? <TypePokemon types={pokemon.types} /> : "< Os tipos do Pokemon não foram encontrados >"}
+            </StyledValue> 
+          </StyledListItemTypesPokemon>
           <li>
             <StyledAttribute>HP:</StyledAttribute> <StyledValue>{pokemon?.stats.hp}</StyledValue> 
           </li>

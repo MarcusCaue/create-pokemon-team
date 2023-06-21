@@ -1,3 +1,5 @@
+import { styled } from "styled-components"
+
 interface InputRadioProps {
   title: string, 
   optionName: string, 
@@ -5,10 +7,23 @@ interface InputRadioProps {
   optionImageVar: string
 }
 
+const StyledInput = styled.input`
+  /* -webkit-appearance: none;
+  padding: 0.1rem 0.7rem;
+  border-color: var(--color-base-text);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 1rem;
+
+  :checked {
+    background-color: var(--color-contrast-text);
+  } */
+`
+
 export function InputRadio({ title, optionName, onChangeFunction, optionImageVar } : InputRadioProps) {
   return (
     <div>
-      <input
+      <StyledInput
         type="radio"
         name="optionImage"
         id="optionImage"
