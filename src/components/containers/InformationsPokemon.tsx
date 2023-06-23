@@ -4,13 +4,14 @@ import { Pokemon } from "../../classes/Pokemon"
 import { TypePokemon } from "../TypePokemon"
 
 const StyledInformationsPokemon = styled.section`
+  height: 40vh;
   gap: 1.5rem;
 `
-const StyledImagePokemon = styled.section<{$animatedIsChoiced: boolean}>`
+const StyledImagePokemon = styled.section`
   flex: 1;
   img {
     display: block;
-    margin: ${props => props.$animatedIsChoiced ? '1rem auto;' : "auto"};
+    margin: auto;
     height: 16rem;
     width: 16rem;
     object-fit: contain;
@@ -76,7 +77,7 @@ interface InformationsPokemonProps {
 export function InformationsPokemon({ imagesOfPokemon, optionImageChoiced, pokemon }: InformationsPokemonProps) {
   return (
     <StyledInformationsPokemon>
-      <StyledImagePokemon $animatedIsChoiced={optionImageChoiced === "animated" ? true : false}>
+      <StyledImagePokemon>
         <img src={
           imagesOfPokemon !== undefined
             ?
@@ -88,7 +89,7 @@ export function InformationsPokemon({ imagesOfPokemon, optionImageChoiced, pokem
             : ''} alt="Imagem de um Pokémon" />
       </StyledImagePokemon>
 
-      <StyledDataPokemon>
+      <StyledDataPokemon> 
         <ul>
           <li> 
             <StyledAttribute>Nome:</StyledAttribute> <StyledValue>{formatName(pokemon?.name)}</StyledValue> 

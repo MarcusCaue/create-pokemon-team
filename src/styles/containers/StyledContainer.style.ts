@@ -2,8 +2,9 @@ import styled from "styled-components"
 
 export const Container = styled.main`
   display: flex;
+  height: 80vh;
+  margin: auto;
   gap: 1rem;
-  margin: 1.5rem auto;
 
   > section {
     background-color: var(--color-background-second);

@@ -41,6 +41,9 @@ const StyledInput = styled.input`
     background-color: var(--color-contrast-text);
   } */
 `
+const StyledLabel = styled.label`
+  font-weight: 600;
+`
 
 export function InputRadio({ title, optionName, onChangeFunction, optionImageVar } : InputRadioProps) {
   return (
@@ -52,7 +55,7 @@ export function InputRadio({ title, optionName, onChangeFunction, optionImageVar
         checked={optionImageVar === optionName}
         onChange={() => onChangeFunction(optionName)}
       /> 
-      <label> { title } </label>
+      <StyledLabel> { title } </StyledLabel>
     </StyledContainerInput>
   )
 }

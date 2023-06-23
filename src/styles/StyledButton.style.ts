@@ -1,15 +1,16 @@
 import styled from "styled-components"
 
-export const StyledButton = styled.button`
-  float: right;
+export const StyledButton = styled.button<{$textColor: string, $bgColor: string}>`
   padding: 0.3rem 2rem;
   font-size: 1rem;
   border-radius: 0.75rem;
   border: 1px solid black;
   cursor: pointer;
-  background-color: rgb(255, 255, 255);
+  color: ${props => props.$textColor};
+  background-color: ${props => props.$bgColor};
+  font-weight: 600;
 
   &:hover {
-    background-color: rgb(240, 240, 240);
+    filter: brightness(1.25);
   }
 `

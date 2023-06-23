@@ -16,7 +16,8 @@ export const HeaderPage = styled.header`
   font-weight: 600;
   text-align: center;
   font-size: 2rem;
-  padding: 1.5rem 0rem;
+  height: 15vh;
+  line-height: 15vh;
 `
 
 const globalStyles = {

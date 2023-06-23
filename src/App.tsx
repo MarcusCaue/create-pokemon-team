@@ -87,7 +87,7 @@ export default function App() {
     <>
       <ResetGlobalCss $darkModeActived={true} />
       <Body>
-        <HeaderPage> Monte o seu Time de Pokemons! </HeaderPage>
+        <HeaderPage> Monte o seu Time de Pokemons!</HeaderPage>
 
         <Container>
           <StyledSearchPokemon>
