@@ -25,9 +25,9 @@ const TypePokemonStyle = styled.span<{$type: string}>`
   background-color: ${props => typesColors.get(props.$type)?.bgColor};
   color: ${props => typesColors.get(props.$type)?.textColor};
 
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   border-radius: 0.5rem;
-  padding: 0.3rem 0.8rem;
+  padding: 0.2rem 0.5rem;
 `
 const TypesPokemonContainerStyle = styled.div`
   display: flex;

@@ -19,6 +19,7 @@ const StyledContainerInput = styled.div`
     display: inline-block;
     width: 0.625rem; height: 0.625rem;
     padding: 0.625rem;
+    border: 1px solid var(--color-base-text);
     border-radius: 9999px;
     background-color: #fff;
   }
