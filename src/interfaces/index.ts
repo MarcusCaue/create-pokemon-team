@@ -8,7 +8,8 @@ export interface StylesMode {
 export interface ImgOptions {
   official: string,
   pixelated: string,
-  animated: string
+  animated: string,
+  icon: string
 }
 
 export interface Stats {

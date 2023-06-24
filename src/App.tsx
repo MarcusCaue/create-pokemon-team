@@ -11,10 +11,10 @@ import { Body, ResetGlobalCss, HeaderPage } from "./styles/general/index.style"
 import { StyledSearchPokemon } from "./styles/containers/StyledSearchPokemon.style"
 import { StyledTeamPokemon } from "./styles/containers/StyledTeamPokemon.style"
 import { Container } from "./styles/containers/StyledContainer.style"
+import { PokemonListItem } from "./components/PokemonListItem"
 
 export default function App() {
   // States
-  const [ pokemonImg,  setPokemonImg  ] = useState<ImgOptions>()
   const [ optionImage, setOptionImage ] = useState('official')
   const [ pokemon, setPokemon ] = useState<Pokemon>()
 
@@ -28,15 +28,17 @@ export default function App() {
     if (inputRefValue !== undefined)
       getPokemon(inputRefValue)
   }
+  
   async function getPokemon(name: string) {
 
     const response = await api.get("/" + name)
     const data = response.data
 
-    const img: ImgOptions = {
+    const images: ImgOptions = {
       "official": data.sprites.other["official-artwork"].front_default,
       "pixelated": data.sprites.front_default,
-      "animated": data.sprites.versions['generation-v']['black-white'].animated.front_default
+      "animated": data.sprites.versions['generation-v']['black-white'].animated.front_default,
+      "icon": data.sprites.versions['generation-vii'].icons.front_default
     }
 
     const statsOfNewPokemon : Stats = {
@@ -49,21 +51,20 @@ export default function App() {
     const newPokemon = new Pokemon(
       data.name,
       data.types.map((typeElement : TypesPokemonPokeApi) => typeElement.type.name),
-      statsOfNewPokemon
+      statsOfNewPokemon,
+      images
     )
 
-    setPokemonImg(img)
     setPokemon(newPokemon)
-
   }
 
   useEffect(() => {
-    // getPokemon("lugia")
-    setPokemonImg({
+    const imagesPokemonTest = {
       official: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png",
       animated: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/249.gif",
-      pixelated: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png"
-    })
+      pixelated: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png",
+      icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vii/icons/249.png"
+    }
 
     const statsPokemonTest: Stats = {
       hp: 1,
@@ -77,12 +78,13 @@ export default function App() {
     const pokemonTest = new Pokemon(
       "lugia",
       [ "psychic", "flying" ],
-      statsPokemonTest
+      statsPokemonTest,
+      imagesPokemonTest
     )
 
     setPokemon(pokemonTest)
   }, [])
-
+  
   return (
     <>
       <ResetGlobalCss $darkModeActived={true} />
@@ -92,7 +94,6 @@ export default function App() {
         <Container>
           <StyledSearchPokemon>
             <InformationsPokemon 
-              imagesOfPokemon={pokemonImg} 
               pokemon={pokemon} 
               optionImageChoiced={optionImage} 
             />
@@ -105,8 +106,7 @@ export default function App() {
           </StyledSearchPokemon>
 
           <StyledTeamPokemon>
-            Aqui haverá futuramente o time de Pokemons que o usuário criou! <br />
-            Aguarde! ;)
+            <PokemonListItem pokemon={pokemon} />
           </StyledTeamPokemon>
         </Container>
       </Body>

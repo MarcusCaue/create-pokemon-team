@@ -69,23 +69,22 @@ function formatName(name: string | undefined) {
 }
 
 interface InformationsPokemonProps {
-  imagesOfPokemon: ImgOptions | undefined, 
   pokemon: Pokemon | undefined,
   optionImageChoiced: string, 
 }
 
-export function InformationsPokemon({ imagesOfPokemon, optionImageChoiced, pokemon }: InformationsPokemonProps) {
+export function InformationsPokemon({ optionImageChoiced, pokemon }: InformationsPokemonProps) {
   return (
     <StyledInformationsPokemon>
       <StyledImagePokemon>
         <img src={
-          imagesOfPokemon !== undefined
+          pokemon?.images !== undefined
             ?
-            imagesOfPokemon[optionImageChoiced as keyof ImgOptions] === null
+            pokemon?.images[optionImageChoiced as keyof ImgOptions] === null
               ?
-              imagesOfPokemon.official
+              pokemon?.images.official
               :
-              imagesOfPokemon[optionImageChoiced as keyof ImgOptions]
+              pokemon?.images[optionImageChoiced as keyof ImgOptions]
             : ''} alt="Imagem de um Pokémon" />
       </StyledImagePokemon>
 
