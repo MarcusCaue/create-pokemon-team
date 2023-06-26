@@ -9,7 +9,8 @@ export const Container = styled.main`
   > section {
     background-color: var(--color-background-second);
     display: flex;
-    padding: 0.8rem 2.5rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
     border-radius: 0.5rem;
   }
 `

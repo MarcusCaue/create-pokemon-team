@@ -1,6 +1,6 @@
 // Import statements
 import api from "./tools/api"
-import { FormEvent, useEffect, useRef, useState } from "react"
+import { FormEvent, MouseEvent, useEffect, useRef, useState } from "react"
 import { Pokemon } from "./classes/Pokemon"
 import { InformationsPokemon } from "./components/containers/InformationsPokemon"
 import { GetFormPokemon } from "./components/containers/GetFormPokemon"
@@ -11,15 +11,41 @@ import { Body, ResetGlobalCss, HeaderPage } from "./styles/general/index.style"
 import { StyledSearchPokemon } from "./styles/containers/StyledSearchPokemon.style"
 import { StyledTeamPokemon } from "./styles/containers/StyledTeamPokemon.style"
 import { Container } from "./styles/containers/StyledContainer.style"
-import { PokemonListItem } from "./components/PokemonListItem"
+import { PokemonListItem } from "./components/containers/PokemonListItem"
+
+const imagesPokemonTest = {
+  official: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png",
+  animated: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/249.gif",
+  pixelated: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png",
+  icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vii/icons/249.png"
+}
+
+const statsPokemonTest: Stats = {
+  hp: 1,
+  attack: 1,
+  defense: 1,
+  specialAttack: 1,
+  specialDefense: 1,
+  speed: 1
+} 
+
+const pokemonTest = new Pokemon(
+  "lugia",
+  [ "psychic", "flying" ],
+  statsPokemonTest,
+  imagesPokemonTest,
+  "Cheirosin"
+)
 
 export default function App() {
   // States
   const [ optionImage, setOptionImage ] = useState('official')
-  const [ pokemon, setPokemon ] = useState<Pokemon>()
+  const [ pokemon, setPokemon ] = useState<Pokemon>(pokemonTest)
+  const [ team, setTeam ] = useState<Array<Pokemon>>([])
 
   // Refs
   const inputRef = useRef<HTMLInputElement>(null)
+  const nicknameInputRef = useRef<HTMLInputElement>(null)
 
   // Functions
   function submitForm(event: FormEvent) {
@@ -28,7 +54,7 @@ export default function App() {
     if (inputRefValue !== undefined)
       getPokemon(inputRefValue)
   }
-  
+
   async function getPokemon(name: string) {
 
     const response = await api.get("/" + name)
@@ -48,42 +74,18 @@ export default function App() {
       defense: data.stats[2].base_stat, specialDefense: data.stats[4].base_stat
     }
 
+    const nicknameNewPokemon = nicknameInputRef.current?.value
+
     const newPokemon = new Pokemon(
       data.name,
       data.types.map((typeElement : TypesPokemonPokeApi) => typeElement.type.name),
       statsOfNewPokemon,
-      images
+      images,
+      nicknameNewPokemon
     )
 
     setPokemon(newPokemon)
   }
-
-  useEffect(() => {
-    const imagesPokemonTest = {
-      official: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png",
-      animated: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/249.gif",
-      pixelated: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png",
-      icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vii/icons/249.png"
-    }
-
-    const statsPokemonTest: Stats = {
-      hp: 1,
-      attack: 1,
-      defense: 1,
-      specialAttack: 1,
-      specialDefense: 1,
-      speed: 1
-    } 
-
-    const pokemonTest = new Pokemon(
-      "lugia",
-      [ "psychic", "flying" ],
-      statsPokemonTest,
-      imagesPokemonTest
-    )
-
-    setPokemon(pokemonTest)
-  }, [])
   
   return (
     <>
@@ -99,14 +101,25 @@ export default function App() {
             />
             <GetFormPokemon 
               submitFormFunction={submitForm} 
-              refInput={inputRef} 
+              refInput={inputRef}
+              refNicknameInput={nicknameInputRef}
               optionImageChoiced={optionImage} 
-              changeOptionImage={setOptionImage} 
+              changeOptionImage={setOptionImage}
+              addPokemonOnTeamFunction={() => {console.log(pokemon); setTeam([...team, pokemon])} }
             />
           </StyledSearchPokemon>
-
+ 
           <StyledTeamPokemon>
-            <PokemonListItem pokemon={pokemon} />
+            {
+              team.length > 0 
+              ? team.map((pokemon, key) => {
+                return (
+                  <PokemonListItem key={key} pokemon={pokemon}/>
+                )
+              })
+              :
+              <p> Adicione Pokemons ao seu time ;) </p>
+            }
           </StyledTeamPokemon>
         </Container>
       </Body>

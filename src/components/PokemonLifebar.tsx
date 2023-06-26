@@ -1,7 +1,7 @@
-export function PokemonLifebar() {
+export function PokemonLifebar({ hp } : { hp?: number }) {
   return (
     <div>
-    
+      { `HP: ` + hp }
     </div>
   )
 }

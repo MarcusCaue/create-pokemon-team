@@ -2,7 +2,7 @@ import { ImgOptions, Stats } from "../interfaces/index"
 
 export class Pokemon {
   public name: string
-  public nickname?: string
+  public nickname: string
   public types: string[]
   public stats: Stats
   public images: ImgOptions
@@ -13,5 +13,9 @@ export class Pokemon {
     this.stats    = stats
     this.nickname = nickname !== undefined ? nickname : name
     this.images   = images
+  }
+
+  public copy() {
+    return new Pokemon(this.name, this.types, this.stats, this.images, this.nickname)
   }
 }
