@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
-import { StyledButton } from "../../styles/StyledButton.style";
-import { StyledInput } from "../../styles/StyledInput.style";
+import { StyledButton, StyledInput } from "../../styles/components/index.style";
 import { InputRadio } from "../InputRadio";
 import React from "react";
 
@@ -51,7 +50,7 @@ export function GetFormPokemon(props : GetFormPokemonProps) {
         <StyledInputsContainer>
           <StyledInput type="text" name="pokemonName" id="pokemonName" ref={props.refInput} placeholder="Digite o nome do Pokemon: " />
 
-          <StyledInput type="text" name="pokemonNickname" id="pokemonNickname" ref={props.refNicknameInput} placeholder="Digite o apelido do seu Pokemon: " />
+          <StyledInput maxLength={20} type="text" name="pokemonNickname" id="pokemonNickname" ref={props.refNicknameInput} placeholder="Digite o apelido do seu Pokemon: " />
         </StyledInputsContainer>
 
         {/* Input Radios */}

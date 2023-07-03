@@ -1,6 +1,7 @@
 // Import statements
 import api from "./tools/api"
-import { FormEvent, MouseEvent, useEffect, useRef, useState } from "react"
+import { TrashIcon } from "./images/TrashIcon"
+import { FormEvent, useRef, useState } from "react"
 import { Pokemon } from "./classes/Pokemon"
 import { InformationsPokemon } from "./components/containers/InformationsPokemon"
 import { GetFormPokemon } from "./components/containers/GetFormPokemon"
@@ -8,40 +9,15 @@ import { GetFormPokemon } from "./components/containers/GetFormPokemon"
 import { ImgOptions, Stats, TypesPokemonPokeApi } from "./interfaces/index"
 // Styles
 import { Body, ResetGlobalCss, HeaderPage } from "./styles/general/index.style"
-import { StyledSearchPokemon } from "./styles/containers/StyledSearchPokemon.style"
-import { StyledTeamPokemon } from "./styles/containers/StyledTeamPokemon.style"
-import { Container } from "./styles/containers/StyledContainer.style"
+import { StyledSearchPokemon, StyledTeamPokemon, Container } from "./styles/containers/index.style"
 import { PokemonListItem } from "./components/containers/PokemonListItem"
-
-const imagesPokemonTest = {
-  official: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png",
-  animated: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/249.gif",
-  pixelated: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png",
-  icon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vii/icons/249.png"
-}
-
-const statsPokemonTest: Stats = {
-  hp: 1,
-  attack: 1,
-  defense: 1,
-  specialAttack: 1,
-  specialDefense: 1,
-  speed: 1
-} 
-
-const pokemonTest = new Pokemon(
-  "lugia",
-  [ "psychic", "flying" ],
-  statsPokemonTest,
-  imagesPokemonTest,
-  "Cheirosin"
-)
+import { StyledPlaceholderToContainer } from "./styles/components/index.style"
 
 export default function App() {
   // States
-  const [ optionImage, setOptionImage ] = useState('official')
-  const [ pokemon, setPokemon ] = useState<Pokemon>(pokemonTest)
-  const [ team, setTeam ] = useState<Array<Pokemon>>([])
+  const [optionImage, setOptionImage] = useState('official')
+  const [pokemon, setPokemon] = useState<Pokemon>()
+  const [team, setTeam] = useState<Array<Pokemon>>([])
 
   // Refs
   const inputRef = useRef<HTMLInputElement>(null)
@@ -50,9 +26,18 @@ export default function App() {
   // Functions
   function submitForm(event: FormEvent) {
     event.preventDefault()
-    const inputRefValue = inputRef.current?.value
-    if (inputRefValue !== undefined)
-      getPokemon(inputRefValue)
+    const inputRefValue = inputRef.current?.value.trim().toLowerCase().replace(/ /g, "-")
+    inputRefValue && getPokemon(inputRefValue)
+  }
+
+  function addPokemonOnTeam() {
+    team.length === 6 ? window.alert("O seu time já está completo.") : pokemon && setTeam([...team, pokemon])
+  }
+
+  function renderPokemonTeam() {
+    return (
+      <ul> { team.map((pokemon, key) => <PokemonListItem key={key} pokemon={pokemon} />) } </ul>
+    )
   }
 
   async function getPokemon(name: string) {
@@ -67,7 +52,7 @@ export default function App() {
       "icon": data.sprites.versions['generation-vii'].icons.front_default
     }
 
-    const statsOfNewPokemon : Stats = {
+    const statsOfNewPokemon: Stats = {
       hp: data.stats[0].base_stat,
       speed: data.stats[5].base_stat,
       attack: data.stats[1].base_stat, specialAttack: data.stats[3].base_stat,
@@ -78,7 +63,7 @@ export default function App() {
 
     const newPokemon = new Pokemon(
       data.name,
-      data.types.map((typeElement : TypesPokemonPokeApi) => typeElement.type.name),
+      data.types.map((typeElement: TypesPokemonPokeApi) => typeElement.type.name),
       statsOfNewPokemon,
       images,
       nicknameNewPokemon
@@ -86,40 +71,49 @@ export default function App() {
 
     setPokemon(newPokemon)
   }
-  
+
   return (
     <>
-      <ResetGlobalCss $darkModeActived={true} />
+      <ResetGlobalCss $darkModeActived />
       <Body>
         <HeaderPage> Monte o seu Time de Pokemons!</HeaderPage>
 
         <Container>
           <StyledSearchPokemon>
-            <InformationsPokemon 
-              pokemon={pokemon} 
-              optionImageChoiced={optionImage} 
-            />
-            <GetFormPokemon 
-              submitFormFunction={submitForm} 
+            {
+              pokemon 
+              ?
+                <InformationsPokemon
+                  pokemon={pokemon}
+                  optionImageChoiced={optionImage}
+                />
+              :
+                <StyledPlaceholderToContainer>
+                  Utilize as barras de pesquisa <br /> abaixo para pesquisar e adicionar <br /> pokemons ao seu time.
+                </StyledPlaceholderToContainer>
+            }
+
+            <GetFormPokemon
+              submitFormFunction={submitForm}
               refInput={inputRef}
               refNicknameInput={nicknameInputRef}
-              optionImageChoiced={optionImage} 
+              optionImageChoiced={optionImage}
               changeOptionImage={setOptionImage}
-              addPokemonOnTeamFunction={() => {console.log(pokemon); setTeam([...team, pokemon])} }
+              addPokemonOnTeamFunction={addPokemonOnTeam}
             />
           </StyledSearchPokemon>
- 
+
           <StyledTeamPokemon>
             {
-              team.length > 0 
-              ? team.map((pokemon, key) => {
-                return (
-                  <PokemonListItem key={key} pokemon={pokemon}/>
-                )
-              })
-              :
-              <p> Adicione Pokemons ao seu time ;) </p>
+              team.length > 0
+                ? 
+                  renderPokemonTeam()
+                :
+                  <StyledPlaceholderToContainer> 
+                    Adicione Pokemons ao seu time 
+                  </StyledPlaceholderToContainer>
             }
+            <TrashIcon />
           </StyledTeamPokemon>
         </Container>
       </Body>

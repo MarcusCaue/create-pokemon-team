@@ -5,7 +5,6 @@ import { PokemonNickname } from "../PokemonNickname";
 import styled from "styled-components"
 
 const StyledPokemonListItem = styled.li`
-  flex: 1;
   display: flex;
   align-items: center;
   gap: 1rem;
