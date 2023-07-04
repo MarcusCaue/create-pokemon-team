@@ -27,12 +27,10 @@ export const StyledSearchPokemon = styled.section`
 `
 export const StyledTeamPokemon = styled.section`
   width: 24vw;
-  padding-top: 3rem !important;
-  padding-left: 0.5rem;
-  padding-right: 2rem;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  align-items: center;
+  gap: 0.5rem;
 
   > ul {
     flex: 1;

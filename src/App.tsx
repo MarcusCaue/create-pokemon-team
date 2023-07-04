@@ -113,7 +113,7 @@ export default function App() {
                     Adicione Pokemons ao seu time 
                   </StyledPlaceholderToContainer>
             }
-            <TrashIcon />
+            { team.length > 0 && <TrashIcon clearTeam={ () => setTeam([]) } />}
           </StyledTeamPokemon>
         </Container>
       </Body>
